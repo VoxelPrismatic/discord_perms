@@ -43,12 +43,13 @@
         <h3>#] Checkboxes to integer</h3>
         <a href="int.html">Convert to integer</a> [check boxes to int]
         <div style="width: 80%; margin: 8px auto;">
-            <textarea id="val" onkeyup="redo()" title="Input value">0</textarea>
+            <textarea id="val" title="Input value">0</textarea>
             <div id="val2" title="True value">0</div>
         </div>
         <div id="boxes"></div>
         <script type="text/javascript">
-            function redo() {
+            function redo(evt) {
+                console.log(evt)
                 var int = Number.parseInt(document.getElementById("val").value);
                 for(var key of Object.keys(perms))
                     document.getElementById(key).checked = (int & perms[key]);
@@ -60,12 +61,12 @@
                 if(document.getElementById("ADMINISTRATOR").checked) {
                     trueint = 8;
                     for(var key of Object.keys(perms)) {
-                        if(key == "ADMINISTRATOR")
-                            continue
                         elem = document.getElementById(key);
-                        elem.disabled = true;
                         if(elem.checked)
                             int |= perms[key];
+                        if(key == "ADMINISTRATOR")
+                            continue
+                        elem.disabled = true;
                     }
                 } else {
                     for(var key of Object.keys(perms)) {
@@ -89,6 +90,7 @@
                     }
                 })
             });
+            document.getElementById("val").onkeyup = redo;
         </script>
     </body>
 </html>
