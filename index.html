@@ -20,12 +20,21 @@
                 margin: 8px auto;
                 background-color: #223333;
                 padding: 8px;
+                width: 80%;
+                height: 30px;
             } #boxes {
                 columns: 2;
                 width: 80%;
                 margin: 8px auto;
             } input[type="checkbox"][disabled] {
                 opacity: 50%;
+            } #val2 {
+                width: 14%;
+                display: inline-block;
+                top: -28px;
+                position: relative;
+                border: 2px solid #00ff00;
+                background-color: #223322;
             }
         </style>
     </head>
@@ -34,8 +43,8 @@
         <h3>#] Checkboxes to integer</h3>
         <a href="int.html">Convert to integer</a> [check boxes to int]
         <div style="width: 80%; margin: 8px auto;">
-            <textarea id="val" onkeyup="redo()" style="width: 80%" title="Input value">0</textarea>
-            <div id="val2" style="width: 20%; display: inline-block;" title="True value">0</div>
+            <textarea id="val" onkeyup="redo()" title="Input value">0</textarea>
+            <div id="val2" title="True value">0</div>
         </div>
         <div id="boxes"></div>
         <script type="text/javascript">
