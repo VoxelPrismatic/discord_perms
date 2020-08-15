@@ -49,8 +49,8 @@
                     }
                 } else {
                     for(var key of Object.keys(perms)) {
-                        elem.disabled = false;
                         elem = document.getElementById(key);
+                        elem.disabled = false;
                         if(elem.checked)
                             int |= perms[key];
                     }
