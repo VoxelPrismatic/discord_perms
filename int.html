@@ -29,12 +29,14 @@
         <div id="boxes"></div>
         <div id="val">0</div>
         <script type="textjavascript">
-            resp = await fetch("perms.json")
-            text = await resp.text();
-            eval(text);
-            for(var key of Object.keys(perms)) {
-                document.getElementById("boxes").innerHTML += 
-                    `<input type="checkbox" id="${key}" name="${key}" value="${perms[key]}" onchange="recalc()"><label for="${key}"> ${key}</label><br>`;
+            async function load() {
+                resp = await fetch("perms.json")
+                text = await resp.text();
+                eval(text);
+                for(var key of Object.keys(perms)) {
+                    document.getElementById("boxes").innerHTML += 
+                        `<input type="checkbox" id="${key}" name="${key}" value="${perms[key]}" onchange="recalc()"><label for="${key}"> ${key}</label><br>`;
+                }
             }
             function recalc() {
                 var int = 0;
@@ -49,6 +51,9 @@
                 }
                 document.getElementById("val").innerHTML = int + "";
             }
+        </script>
+        <script type="textjavascript">
+            await load();
         </script>
     </body>
 </html>
