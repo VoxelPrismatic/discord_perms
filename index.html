@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
@@ -7,7 +6,7 @@
             * {
                 font-family: "Ubuntu";
                 color: #aaaaaa;
-            } textarea, pre {
+            } textarea, pre, label {
                 font-family: "Ubuntu Mono";
             } h1, h2, h3, h4, h5, h6 {
                 color: #00ffff;
@@ -15,12 +14,63 @@
                 background-color: #112222;
             } a {
                 color: #aaffff;
+            } #val {
+                width: 80%;
+                border-radius: 5px;
+                border: 2px solid #00ffff;
+                margin: 8px auto;
+                background-color: #223333;
+                display: block;
+                padding: 8px;
+            } #boxes {
+                columns: 2;
+                width: 80%;
+                margin: 8px auto;
             }
         </style>
     </head>
     <body>
         <h1>#] Discord permissions converter</h1>
-        <a href="int.html">Convert to integer</a> [check boxes to int]<br>
-        <a href="vw.html">Convert to list</a> [see the permissions given an integer]
+        <h3>#] Checkboxes to integer</h3>
+        <a href="int.html">Convert to integer</a> [check boxes to int]
+        <textarea id="val" onkeyup="redo()">0</textarea>
+        <div id="boxes"></div>
+        <script type="text/javascript">
+            function redo() {
+                var int = Number.parseInt(document.getElementById("val").value);
+                for(var key of Object.keys(perms))
+                    document.getElementById(key).checked = (int & perms[key]);
+            }
+            function recalc() {
+                var int = 0;
+                if(document.getElementById("ADMINISTRATOR").checked) {
+                    int = 8;
+                    for(var key of Object.keys(perms)) {
+                        if(key == "ADMINISTRATOR")
+                            continue
+                        elem = document.getElementById(key);
+                        elem.disabled = true;
+                    }
+                } else {
+                    for(var key of Object.keys(perms)) {
+                        elem = document.getElementById(key);
+                        elem.disabled = false;
+                        if(elem.checked)
+                            int |= perms[key];
+                    }
+                }
+                document.getElementById("val").value = int + "";
+                document.getElementById("val").innerHTML = int + "";
+            }
+            fetch("perms.json").then((resp) => {
+                resp.text().then((text) => {
+                    eval(text);
+                    for(var key of Object.keys(perms)) {
+                        document.getElementById("boxes").innerHTML += 
+`<input type="checkbox" id="${key}" name="${key}" value="${perms[key]}" onclick="recalc()"><label for="${key}"> ${key}</label><br>`;
+                    }
+                })
+            });
+        </script>
     </body>
 </html>
