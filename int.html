@@ -18,9 +18,8 @@
                 width: 80%;
                 border-radius: 5px;
                 border: 2px solid #00ffff;
-                margin: auto;
+                margin: 8px auto;
                 background-color: #223333;
-                margin-top: 8px;
             } #boxes {
                 columns: 2;
                 width: 80%;
@@ -38,6 +37,11 @@
                 var int = 0;
                 if(document.getElementById("ADMINISTRATOR").checked) {
                     int = 8;
+                    for(var key of Object.keys(perms)) {
+                        elem = document.getElementById(key);
+                        elem.disabled = true;
+                        elem.checked = false;
+                    }
                 } else {
                     for(var key of Object.keys(perms)) {
                         elem = document.getElementById(key);
