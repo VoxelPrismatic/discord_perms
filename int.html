@@ -41,12 +41,15 @@
                 if(document.getElementById("ADMINISTRATOR").checked) {
                     int = 8;
                     for(var key of Object.keys(perms)) {
+                        if(key == "ADMINISTRATOR")
+                            continue
                         elem = document.getElementById(key);
                         elem.disabled = true;
                         elem.checked = false;
                     }
                 } else {
                     for(var key of Object.keys(perms)) {
+                        elem.disabled = false;
                         elem = document.getElementById(key);
                         if(elem.checked)
                             int |= perms[key];
