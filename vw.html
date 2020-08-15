@@ -31,11 +31,11 @@
     <body>
         <h1>#] Discord permissions converter</h1>
         <h3>#] Checkboxes to integer</h3>
-        <textarea id="val" onchange="recalc">0</textarea>
+        <textarea id="val" onkeyup="recalc">0</textarea>
         <div id="boxes"></div>
         <script type="text/javascript">
             function recalc() {
-                var int = Number.parseInt(document.getElementById("val").innerHTML);
+                var int = Number.parseInt(document.getElementById("val").value);
                 for(var key of Object.keys(perms))
                     document.getElementById(key).checked = (int & perms[key]);
             }
