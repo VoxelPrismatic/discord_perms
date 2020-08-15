@@ -26,6 +26,8 @@
                 columns: 2;
                 width: 80%;
                 margin: 8px auto;
+            } input[type="checkbox"][disabled] {
+                opacity: 50%;
             }
         </style>
     </head>
@@ -45,7 +47,6 @@
                             continue
                         elem = document.getElementById(key);
                         elem.disabled = true;
-                        elem.checked = false;
                     }
                 } else {
                     for(var key of Object.keys(perms)) {
