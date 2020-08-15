@@ -26,6 +26,8 @@
                 columns: 2;
                 width: 80%;
                 margin: 8px auto;
+            } input[type="checkbox"][disabled] {
+                opacity: 50%;
             }
         </style>
     </head>
@@ -40,6 +42,7 @@
                 var int = Number.parseInt(document.getElementById("val").value);
                 for(var key of Object.keys(perms))
                     document.getElementById(key).checked = (int & perms[key]);
+                recalc();
             }
             function recalc() {
                 var int = 0;
