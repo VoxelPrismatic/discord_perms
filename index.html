@@ -20,12 +20,12 @@
                 margin: 8px auto;
                 background-color: #223333;
                 padding: 8px;
-                width: 80%;
-                min-width: 80%;
-                max-width: 80%;
-                height: 30px;
-                max-height: 30px;
-                min-height: 30px;
+                width: 64%;
+                min-width: 64%;
+                max-width: 64%;
+                height: 55px;
+                max-height: 55px;
+                min-height: 55px;
             } #boxes {
                 columns: 2;
                 width: 80%;
@@ -33,9 +33,9 @@
             } input[type="checkbox"][disabled] {
                 opacity: 50%;
             } #val2 {
-                width: 14%;
-                min-width: 14%;
-                max-width: 14%;
+                width: 30%;
+                min-width: 30%;
+                max-width: 30%;
                 display: inline-block;
                 top: -28px;
                 position: relative;
@@ -88,7 +88,10 @@
                 }
                 document.getElementById("val").value = int + "";
                 document.getElementById("val").innerHTML = int + "";
-                document.getElementById("val2").innerHTML = trueint + "";
+                document.getElementById("val2").innerHTML = `
+DEC: <pre>${trueint}</pre><br>
+HEX: <pre>${trueint.toString(16)}</pre><br>
+BIN: <pre style="font-size: x-small">${trueint.toString(2)</pre>`;
             }
             fetch("perms.json").then((resp) => {
                 resp.text().then((text) => {
