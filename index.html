@@ -6,7 +6,7 @@
             * {
                 font-family: "Ubuntu";
                 color: #aaaaaa;
-            } textarea, pre, label {
+            } textarea, pre, label, nani {
                 font-family: "Ubuntu Mono";
             } h1, h2, h3, h4, h5, h6 {
                 color: #00ffff;
@@ -90,8 +90,8 @@
                 document.getElementById("val").innerHTML = int + "";
                 document.getElementById("val2").innerHTML = `
 DEC: <pre>${trueint}</pre><br>
-HEX: <pre>${trueint.toString(16)}</pre><br>
-BIN: <pre style="font-size: x-small">${trueint.toString(2)</pre>`;
+HEX: <pre>0x${trueint.toString(16)}</pre><br>
+BIN: <pre style="font-size: x-small">0b${trueint.toString(2)</pre>`;
             }
             fetch("perms.json").then((resp) => {
                 resp.text().then((text) => {
