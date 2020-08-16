@@ -115,9 +115,9 @@
             function parse_int(i) {
                 i = i + "";
                 var int = Number.parseInt(i);
-                if(val.startsWith("0b"))
+                if(i.startsWith("0b"))
                     int = Number.parseInt(i.slice(2), 2);
-                if(val.startsWith("0o"))
+                if(i.startsWith("0o"))
                     int = Number.parseInt(i.slice(2), 8);
                 return int;
             }
