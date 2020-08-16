@@ -48,7 +48,6 @@
     <body>
         <h1>#] Discord permissions converter</h1>
         <h3>#] Checkboxes to integer</h3>
-        <a href="int.html">Convert to integer</a> [check boxes to int]
         <div style="width: 80%; margin: 8px auto;">
             <textarea id="val" title="Input value">0</textarea>
             <div id="val2" title="True value">
@@ -70,11 +69,11 @@
                     document.getElementById(key).checked = (int & perms[key]);
                 recalc();
                 if(val.startsWith("0x"))
-                    int = int.toString(16);
+                    int = "0x" + int.toString(16);
                 else if(val.startsWith("0b"))
-                    int = int.toString(2);
+                    int = "0b" + int.toString(2);
                 else if(val.startsWith("0o"))
-                    int = int.toString(8);
+                    int = "0o" + int.toString(8);
                 document.getElementById("val").value = int + "";
                 document.getElementById("val").innerHTML = int + "";
             }
