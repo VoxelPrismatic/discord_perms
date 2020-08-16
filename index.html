@@ -130,7 +130,15 @@
                     }
                 })
             });
-            document.getElementById("val").onkeyup = redo;
+            function repeater(evt) {
+                if(["ArrowDown", "ArrowUp"].includes(evt.key)) {
+                    redo(evt, true);
+                    globalThis.repeat_timeout = window.setTimeout(repeater, 200, evt);
+                }
+            }
+            document.getElementById("val").onkeyup = (evt) => { window.clearTimeout(globalThis.repeat_timeout); redo(evt) };
+            document.getElementById("val").onkeydown = (evt) => { globalThis.repeat_timeout = window.setTimeout(repeater, 500, evt) };
+            repeat_timeout = 0;
         </script><br><br>
         <a href="/prizm.dev/">Check out my other stuff!</a>
     </body>
