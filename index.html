@@ -70,25 +70,6 @@
         </div>
         <div id="boxes"></div>
         <script type="text/javascript">
-            function redo(evt) {
-                var val = document.getElementById("val").value
-                var int = Number.parseInt(val);
-                if(evt.key == "ArrowUp")
-                    int += 1
-                else if(evt.key == "ArrowDown")
-                    int -= 1
-                for(var key of Object.keys(perms))
-                    document.getElementById(key).checked = (int & perms[key]);
-                int = recalc();
-                if(val.startsWith("0x"))
-                    int = "0x" + int.toString(16);
-                else if(val.startsWith("0b"))
-                    int = "0b" + int.toString(2);
-                else if(val.startsWith("0o"))
-                    int = "0o" + int.toString(8);
-                document.getElementById("val").value = int + "";
-                document.getElementById("val").innerHTML = int + "";
-            }
             function recalc() {
                 var int = 0;
                 var trueint = 0
@@ -115,7 +96,25 @@
 <nani><b>DEC:</b> ${trueint}</nani><br>
 <nani><b>HEX:</b> 0x${trueint.toString(16)}</nani><br>
 <nani><b>BIN:</b> <span style="font-size: x-small">0b${trueint.toString(2)}</span></nani>`;
-                return int;
+                var val = document.getElementById("val").innerHTML;
+                if(val.startsWith("0x"))
+                    int = "0x" + int.toString(16);
+                else if(val.startsWith("0b"))
+                    int = "0b" + int.toString(2);
+                else if(val.startsWith("0o"))
+                    int = "0o" + int.toString(8);
+                document.getElementById("val").value = int + "";
+                document.getElementById("val").innerHTML = int + "";
+            }
+            function redo(evt) {
+                var int = Number.parseInt(val);
+                if(evt.key == "ArrowUp")
+                    int += 1;
+                else if(evt.key == "ArrowDown")
+                    int -= 1;
+                for(var key of Object.keys(perms))
+                    document.getElementById(key).checked = (int & perms[key]);
+                recalc();
             }
             fetch("perms.json").then((resp) => {
                 resp.text().then((text) => {
