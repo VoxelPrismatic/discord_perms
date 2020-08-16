@@ -90,7 +90,7 @@
                 document.getElementById("val").innerHTML = int + "";
                 document.getElementById("val2").innerHTML = `
 <nani><b>DEC:</b> ${trueint}</nani><br>
-<nani><b>HEX:</b> <pre>0x${trueint.toString(16)}</nani><br>
+<nani><b>HEX:</b> 0x${trueint.toString(16)}</nani><br>
 <nani><b>BIN:</b> <span style="font-size: x-small">0b${trueint.toString(2)}</span></nani>`;
             }
             fetch("perms.json").then((resp) => {
