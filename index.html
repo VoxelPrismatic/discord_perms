@@ -145,7 +145,7 @@
                     perm = parse_int(document.URL.split("?perms=")[1]);
                     if(!perm.isNaN) {
                         for(var key of Object.keys(perms))
-                            document.getElementById(key).checked = (int & perms[key]);
+                            document.getElementById(key).checked = (perm & perms[key]);
                         recalc();
                     } else {
                         window.history.replaceState("", null, "?perms=0");
