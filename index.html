@@ -107,6 +107,7 @@
                 document.getElementById("val").innerHTML = int + "";
             }
             function redo(evt) {
+                var val = document.getElementById("val").innerHTML;
                 var int = Number.parseInt(val);
                 if(evt.key == "ArrowUp")
                     int += 1;
