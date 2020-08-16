@@ -100,7 +100,7 @@
 <nani><b>HEX:</b> 0x${trueint.toString(16)}</nani><br>
 <nani><b>BIN:</b> <span style="font-size: x-small">0b${trueint.toString(2)}</span></nani>`;
                 var val = document.getElementById("val").innerHTML;
-                window.history.replaceState("", null, "?perms=" + int.toString(16))
+                window.history.replaceState("", null, "?perms=0x" + int.toString(16))
                 if(val.startsWith("0x"))
                     int = "0x" + int.toString(16);
                 else if(val.startsWith("0b"))
