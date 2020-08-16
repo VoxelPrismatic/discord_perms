@@ -107,8 +107,10 @@
                     int = "0b" + int.toString(2);
                 else if(val.startsWith("0o"))
                     int = "0o" + int.toString(8);
-                document.getElementById("val").value = int + "";
-                document.getElementById("val").innerHTML = int + "";
+                if(int + "" != val) {
+                    document.getElementById("val").value = int + "";
+                    document.getElementById("val").innerHTML = int + "";
+                }
             }
             function redo(evt) {
                 var val = document.getElementById("val").innerHTML;
@@ -117,6 +119,9 @@
                     int += 1;
                 else if(evt.key == "ArrowDown")
                     int -= 1;
+                mn = 0;
+                mx = Object.values(perms).reduce((a, b) => a + b);
+                int = Math.min(Math.max(int, mn), mx);
                 for(var key of Object.keys(perms))
                     document.getElementById(key).checked = (int & perms[key]);
                 recalc();
@@ -132,7 +137,12 @@
             });
             document.getElementById("val").onkeydown = redo;
             repeat_timeout = 0;
-        </script><br><br>
+        </script><br>
+        Notes:<br>
+        - The green bit is the true value<br>
+        - You can edit the blue area<br>
+        - If <nani>ADMINISTRATOR</nani> is selected, the true value is always 8<br>
+        - You can cycle through the values with the up and down arrow keys<br><br>
         <a href="/prizm.dev/">Check out my other stuff!</a>
     </body>
 </html>
