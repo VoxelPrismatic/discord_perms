@@ -37,7 +37,8 @@
                 border: 2px solid #00ff00;
                 background-color: #223322;
                 margin-left: 10px;
-                flex: 210px;
+                width: 210px;
+                min-width: 210px;
             } #stdin {
                 width: 80%;
                 margin: 8px auto;
@@ -48,6 +49,8 @@
                 } #val2 {
                     margin-top: 8px;
                     margin-left: 0px;
+                    width: 100%;
+                    min-width: 100%;
                 } #boxes {
                     columns: 1;
                 }
@@ -68,7 +71,7 @@
         <div id="boxes"></div>
         <script type="text/javascript">
             function redo(evt) {
-                val = document.getElementById("val").value
+                var val = document.getElementById("val").value
                 var int = Number.parseInt(val);
                 if(evt.key == "ArrowUp")
                     int += 1
@@ -76,7 +79,7 @@
                     int -= 1
                 for(var key of Object.keys(perms))
                     document.getElementById(key).checked = (int & perms[key]);
-                recalc();
+                int = recalc();
                 if(val.startsWith("0x"))
                     int = "0x" + int.toString(16);
                 else if(val.startsWith("0b"))
