@@ -152,7 +152,8 @@
                     }
                 })
             });
-            document.getElementById("val").onkeydown = redo;
+            document.getElementById("val").onkeyup = (evt) => { if(!["ArrowUp", "ArrowDown"].includes(evt.key)) { redo(evt) } };
+            document.getElementById("val").onkeydown = (evt) => { if(["ArrowUp", "ArrowDown"].includes(evt.key)) { redo(evt) } };
             repeat_timeout = 0;
         </script><br>
         <b>Notes:</b><br>
