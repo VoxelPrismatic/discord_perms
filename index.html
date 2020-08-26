@@ -152,9 +152,19 @@
                     }
                 })
             });
-            document.getElementById("val").onkeyup = (evt) => { if(!["ArrowUp", "ArrowDown"].includes(evt.key)) { redo(evt) } };
-            document.getElementById("val").onkeydown = (evt) => { if(["ArrowUp", "ArrowDown"].includes(evt.key)) { redo(evt) } };
-            repeat_timeout = 0;
+            var input_timeout = 0;
+            document.getElementById("val").onkeyup = (evt) => { 
+                if(!["ArrowUp", "ArrowDown"].includes(evt.key)) { 
+                    globalThis.input_timeout = window.setTimeout(redo, 1000, evt));
+                } 
+            };
+            document.getElementById("val").onkeydown = (evt) => { 
+                window.clearTimeout(globalThis.input_timeout);
+                if(["ArrowUp", "ArrowDown"].includes(evt.key)) { 
+                    redo(evt);
+                } 
+            };
+            var repeat_timeout = 0;
         </script><br>
         <b>Notes:</b><br>
         - The green bit is the true value<br>
