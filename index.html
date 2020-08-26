@@ -155,7 +155,7 @@
             var input_timeout = 0;
             document.getElementById("val").onkeyup = (evt) => { 
                 if(!["ArrowUp", "ArrowDown"].includes(evt.key)) { 
-                    globalThis.input_timeout = window.setTimeout(redo, 1000, evt));
+                    globalThis.input_timeout = window.setTimeout(redo, 1000, evt);
                 } 
             };
             document.getElementById("val").onkeydown = (evt) => { 
