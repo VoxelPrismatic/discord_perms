@@ -8,7 +8,7 @@
             * {
                 font-family: "Ubuntu";
                 color: #aaaaaa;
-            } pre, label, nani, nani *, #val {
+            } pre, label, nani, nani *, #val, tr td:first-child, tr td:last-child {
                 font-family: "Ubuntu Mono";
             } h1, h2, h3, h4, h5, h6 {
                 color: #00ffff;
@@ -63,21 +63,193 @@
     </head>
     <body>
         <h1>#] Discord permissions descriptions</h1>
+        Discord's descriptions for their permissions are a little lack-luster. Let's fix that.
         <table>
-            <th>
-                <td>Permission</td>
-                <td>Description</td>
-                <td>Value</td>
-            </th>
-            <tr>
-                <td><nani>CREATE_INSTANT_INVITE</nani></td>
-                <td>
-                    Allows anybody with this permission to create an invite to the guild. 
-                    Does not affect the "Invite your friends" button at the top of the channel though.
-                </td>
-                <td><nani>0x00000001</nani></td>
-           `</tr>
-           <tr>
+            <thead>
+                <th>
+                    <td>Permission</td>
+                    <td>Description</td>
+                    <td>Value</td>
+                </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CREATE_INSTANT_INVITE</td>
+                    <td>
+                        Allows anybody with this permission to create an invite to the guild. 
+                        Does not affect the "Invite your friends" button at the top of the channel though.
+                    </td>
+                    <td><nani>0x00000001</nani></td>
+                </tr>
+                <tr>
+                    <td>KICK_MEMBERS</td>
+                    <td>
+                        Allows anybody with this permission to kick members.
+                    </td>
+                    <td>0x00000002</td>
+                </tr>
+                <tr>
+                    <td>BAN_MEMBERS</td>
+                    <td>
+                        Allows anybody with this permission to ban members. Bots cannot be banned.
+                    </td>
+                    <td>0x00000004</td>
+                </tr>
+                <tr>
+                    <td>ADMINISTRATOR<td>
+                    <td>
+                        Basically gives all permissions in the guild except for managing above roles.
+                        Also disables slowmode for this role.
+                    </td>
+                    <td>0x00000008</td>
+                </tr>
+                <tr>
+                    <td>MANAGE_CHANNELS</td>
+                    <td>
+                        Allows anybody with this permission to manage any text channel, news channel, voice channel,
+                        announcement channel or category channel that they can see. Also disables slowmode for this role.
+                    </td>
+                    <td>0x00000010</td>
+                </tr>
+                <tr>
+                    <td>MANAGE_GUILD</td>
+                    <td>
+                        Allows anybody with this permission to manage the guild name, region, banner, AFK voice channels, 
+                        system messages and channels, notification settings and more.
+                    </td>
+                    <td>0x00000020</td>
+                </tr>
+                <tr>
+                    <td>ADD_REACTIONS</td>
+                    <td>
+                        Allows anybody with this permission to add new reactions to a message. Existing reactions can always
+                        be reacted to.
+                    </td>
+                    <td>0x00000040</td>
+                </tr>
+                <tr>
+                    <td>VIEW_AUDIT_LOG</td>
+                    <td>
+                        Allows anybody with this permission to view the audit log. That's it.
+                    </td>
+                    <td>0x00000080</td>
+                </tr>
+                <tr>
+                    <td>PRIORITY_SPEAKER</td>
+                    <td>
+                        Allows anybody with this permission to have priority over the others in a voice channel.
+                    </td>
+                    <td>0x00000100</td>
+                </tr>
+                <tr>
+                    <td>STREAM</td>
+                    <td>
+                        Allows anybody with this permission to stream video in a voice channel. Bots cannot stream video.
+                    </td>
+                    <td>0x00000200</td>
+                </tr>
+                <tr>
+                    <td>READ_MESSAGES</td>
+                    <td>
+                        Allows anybody with this permission to read messages in a text channel, announcement channel or news channel.
+                    </td>
+                    <td>0x00000400</td>
+                </tr>
+                <tr>
+                    <td>SEND_MESSAGES</td>
+                    <td>
+                        Allows anybody with this permission to send messages in a text channel, announcement channel or news channel.
+                        Previously sent messages cannot be edited either.
+                    </td>
+                    <td>0x00000800</td>
+                </tr>
+                <tr>
+                    <td>SEND_TTS_MESSAGES</td>
+                    <td>
+                        Allows anybody with this permission to use the <nani>/tts</nani> command when sending a message to automatically
+                        speak out the message to all users that enabled TTS and are currently viewing that channel. 
+                        TTS is not supported on Linux.
+                    </td>
+                    <td>0x00001000</td>
+                </tr>
+                <tr>
+                    <td>MANAGE_MESSAGES</td>
+                    <td>
+                        Allows anybody with this permission to delete, pin, or edit reactions of any message.
+                    </td>
+                    <td>0x00002000</td>
+                </tr>
+                <tr>
+                    <td>EMBED_LINKS</td>
+                    <td>
+                        Allows anybody with this permission to embed links such as YouTube videos or tweets. If the message only contains
+                        a link to an image or video file, then the link is hidden and the image is shown. The embedded image or video does
+                        NOT count as an attachment when working with the API.
+                    </td>
+                    <td>0x00004000</td>
+                </tr>
+                <tr>
+                    <td>ATTACH_FILES</td>
+                    <td>
+                        Allows anybody with this permission to upload files. The attached file does NOT count as an embed, and links to
+                        image or video files does NOT count as attaching a file.
+                    </td>
+                    <td>0x00008000</td>
+                </tr>
+                <tr>
+                    <td>READ_MESSAGE_HISTORY</td>
+                    <td>
+                        Allows anybody with this permission to scroll back in the message history from when they started viewing it.
+                    </td>
+                    <td>0x00010000</td>
+                </tr>
+                <tr>
+                    <td>MENTION_EVERYONE</td>
+                    <td>
+                        Allows anybody with this permission to use <nani>@everyone</nanu> <nani>@here</nani> or mention any existing
+                        role, even if that role explicitly states to not let everyone mention it.
+                    </td>
+                    <td>0x00020000</td>
+                </tr>
+                <tr>
+                    <td>EXTERNAL_EMOJIS</td>
+                    <td>
+                        Allows anybody with this permission to use emojis not available in the guild as a reaction or in the message content.
+                        Bots can use external emojis if they have this permission and can access the emoji.
+                    </td>
+                    <td>0x00040000</td>
+                </tr>
+                <tr>
+                    <td>VIEW_GUILD_INSIGHTS</td>
+                    <td>
+                        Allows anybody with this permission to view the guild insights of a community guild. This permission is not available
+                        for non community guilds.
+                    </td>
+                    <td>0x00080000</td>
+                </tr>
+                <tr>
+                    <td>CONNECT</td>
+                    <td>
+                        Allows anybody with this permission to connect to a voice channel. This does not guarentee the ability to speak.
+                    </td>
+                    <td>0x00100000</td>
+                </tr>
+                <tr>
+                    <td>SPEAK</td>
+                    <td>
+                        Allows anybody with this permission to speak in a voice channel. This does not mean that they can connect.
+                    </td>
+                    <td>0x00200000</td>
+                </tr>
+                <tr>
+                    <td>More soon</td>
+                    <td>
+                        I'm going to add more descriptions soon.
+                    </td>
+                    <td>...</td>
+                </tr>
+            </tbody>
+        </table>
         <a href=".">Calculate permissions</a>
         <a href="/prizm.dev/">Check out my other stuff!</a>
     </body>
