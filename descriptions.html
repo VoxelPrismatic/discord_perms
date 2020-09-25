@@ -58,6 +58,13 @@
                 } #boxes {
                     columns: 1;
                 }
+            } 
+            th:nth-child(2), td:nth-child(2) {
+                border-left: 2px solid #0ff;
+                border-right: 2px solid #0ff;
+            }
+            th, td {
+                padding: 5px;
             }
         </style>
     </head>
@@ -96,7 +103,7 @@
                     <td>0x00000004</td>
                 </tr>
                 <tr>
-                    <td>ADMINISTRATOR<td>
+                    <td>ADMINISTRATOR</td>
                     <td>
                         Basically gives all permissions in the guild except for managing above roles.
                         Also disables slowmode for this role.
