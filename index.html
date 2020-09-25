@@ -71,6 +71,23 @@
         </div>
         <div id="boxes"></div>
         <script type="text/javascript">
+            fetch("perms.json").then((resp) => {
+                resp.text().then((text) => {
+                    eval(text);
+                    for(var key of Object.keys(perms)) {
+                        document.getElementById("boxes").innerHTML += 
+`<input type="checkbox" id="${key}" name="${key}" value="${perms[key]}" onclick="recalc()"><label for="${key}"> ${key}</label><br>`;
+                    }
+                    perm = parse_int(document.URL.split("?perms=")[1]);
+                    if(!perm.isNaN) {
+                        for(var key of Object.keys(perms))
+                            document.getElementById(key).checked = (perm & perms[key]);
+                        recalc();
+                    } else {
+                        window.history.replaceState("", null, "?perms=0");
+                    }
+                })
+            });
             function recalc() {
                 var int = 0;
                 var trueint = 0
@@ -133,23 +150,6 @@
                     document.getElementById(key).checked = (int & perms[key]);
                 recalc();
             }
-            fetch("perms.json").then((resp) => {
-                resp.text().then((text) => {
-                    eval(text);
-                    for(var key of Object.keys(perms)) {
-                        document.getElementById("boxes").innerHTML += 
-`<input type="checkbox" id="${key}" name="${key}" value="${perms[key]}" onclick="recalc()"><label for="${key}"> ${key}</label><br>`;
-                    }
-                    perm = parse_int(document.URL.split("?perms=")[1]);
-                    if(!perm.isNaN) {
-                        for(var key of Object.keys(perms))
-                            document.getElementById(key).checked = (perm & perms[key]);
-                        recalc();
-                    } else {
-                        window.history.replaceState("", null, "?perms=0");
-                    }
-                })
-            });
             var input_timeout = 0;
             document.getElementById("val").onkeyup = (evt) => { 
                 if(!["ArrowUp", "ArrowDown"].includes(evt.key)) { 
