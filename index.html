@@ -56,6 +56,14 @@
                 } #boxes {
                     columns: 1;
                 }
+            } @media screen and (min-width: 1024) {
+                #boxes { columns: 3; }
+            } @media screen and (min-width: 1536) {
+                #boxes { columns: 4; }
+            } input[type="checkbox"] {
+                cursor: pointer;
+            } input[type="checkbox"]:disabled {
+                cursor: no-drop;
             }
         </style>
     </head>
@@ -74,10 +82,13 @@
             fetch("perms.json").then((resp) => {
                 resp.text().then((text) => {
                     eval(text);
+                    var st = "";
                     for(var key of Object.keys(perms)) {
-                        document.getElementById("boxes").innerHTML += 
-`<input type="checkbox" id="${key}" name="${key}" value="${perms[key]}" onclick="recalc()"><label for="${key}"> ${key}</label><br>`;
+                        var title = `title="DEC: ${key}&#10;HEX: 0x${key.toString(16)}&#10;BIN: 0b${key.toString(2)}"`
+                        st += `<input type="checkbox" id="${key}" name="${key}" value="${perms[key]}" onclick="recalc()" ${title}>` +
+                              `<label for="${key}" ${title}> ${key}</label><br>`;
                     }
+                    document.getElementById("boxes").innerHTML += st;
                     perm = parse_int(document.URL.split("?perms=")[1]);
                     if(!perm.isNaN) {
                         for(var key of Object.keys(perms))
@@ -170,9 +181,12 @@
         - If <nani>ADMINISTRATOR</nani> is selected, the true value is always 8<br>
         - You can cycle through the values with the up and down arrow keys<br>
         - The check boxes will take roughly half a second to update after you type something.<br>
-        - Last updated: sept-29-2020<br>
+        - Last updated [API]: sept-29-2020<br>
         <nani>&nbsp; &nbsp; </nani>- Renamed: <nani>USE_VAD</nani> --> <nani>USE_VOICE_ACTIVATION</nani><br>
-        <nani>&nbsp; &nbsp; </nani>- Renamed: <nani>USE_EXTERNAL_EMOJIS</nani> --> <nani>EXTERNAL_EMOJIS</nani><br><br>
+        <nani>&nbsp; &nbsp; </nani>- Renamed: <nani>USE_EXTERNAL_EMOJIS</nani> --> <nani>EXTERNAL_EMOJIS</nani><br>
+        - Last updated [UTILITY]: nov-24-2020<br>
+        <nani>&nbsp; &nbsp; </nani>- Updated CSS<br>
+        <nani>&nbsp; &nbsp; </nani>- Updated inputs: Hovering over them now shows the DEC/HEX/BIN values<br><br>
         <a  href="./descriptions.html">Understand what each permission means</a><br>
         <a href="/prizm.dev/">Check out my other stuff!</a>
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
