@@ -107,16 +107,18 @@
                     }
                 })
             });
-            function change_font_size(eID) {
+            function change_font_size(eID, reset = false) {
                 var e = document.getElementById(eID);
                 var n = e.children[0].getBoundingClientRect().height;
-                e = e.children[1];
+                var ee = e.children[1];
+                if(reset)
+                    ee.style.fontSize = "";
                 if(e.getBoundingClientRect().height > n) {
-                    e.style.fontSize = "small";
+                    ee.style.fontSize = "small";
                     if(e.getBoundingClientRect().height > n) {
-                        e.style.fontSize = "x-small";
+                        ee.style.fontSize = "x-small";
                         if(e.getBoundingClientRect().height > n) {
-                            e.style.fontSize = "xx-small";
+                            ee.style.fontSize = "xx-small";
                         }
                     }
                 }
@@ -203,6 +205,11 @@
                 } 
             };
             var repeat_timeout = 0;
+            window.onresize = () => {
+                change_font_size('val-dec', 1);
+                change_font_size('val-hex', 1);
+                change_font_size('val-bin', 1);
+            }
         </script><br>
         <b>Notes:</b><br>
         - The green bit is the true value<br>
