@@ -84,7 +84,7 @@
                     eval(text);
                     var st = "";
                     for(var key of Object.keys(perms)) {
-                        var title = `title="DEC: ${key}&#10;HEX: 0x${key.toString(16)}&#10;BIN: 0b${key.toString(2)}"`
+                        var title = `title="DEC: ${perms[key]}&#10;HEX: 0x${perms[key].toString(16)}&#10;BIN: 0b${perms[key].toString(2)}"`
                         st += `<input type="checkbox" id="${key}" name="${key}" value="${perms[key]}" onclick="recalc()" ${title}>` +
                               `<label for="${key}" ${title}> ${key}</label><br>`;
                     }
