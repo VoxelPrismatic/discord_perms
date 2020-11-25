@@ -171,18 +171,25 @@
             }
             function parse_int(i) {
                 i = (i + "").trim()
-                var int = Number.parseInt(i);
-                if(i.startsWith("0b"))
-                    int = Number.parseInt(i.slice(2), 2);
-                if(i.startsWith("0o"))
-                    int = Number.parseInt(i.slice(2), 8);
+                if(i.length == 2 && /^0[xb]$/i.test(i))
+                    throw Error("Invalid");
+                var int = Number(i);
+                if(isNaN(int))
+                    throw Error("Invalid");
                 return int;
             }
             function redo(evt) {
                 var val = document.getElementById("val").innerHTML;
-                if(val.trim().length == 2 && /^0[xb]$/i.test(val.trim()))
-                    return
-                int = parse_int(val);
+                var sty = document.getElementById("val").style;
+                try {
+                    int = parse_int(val);
+                    style.borderColor = "";
+                    style.backgroundColor = "";
+                } catch(err) {
+                    style.borderColor = "#f00";
+                    style.backgroundColor = "#322";
+                    return;
+                }
                 if(evt.key == "ArrowUp")
                     int += 1;
                 else if(evt.key == "ArrowDown")
@@ -218,13 +225,16 @@
         - You can edit the blue area<br>
         - If <nani>ADMINISTRATOR</nani> is selected, the true value is always 8<br>
         - You can cycle through the values with the up and down arrow keys<br>
-        - The check boxes will take roughly half a second to update after you type something.<br>
+        - The check boxes will take roughly half a second to update after you type something.<br><br>
         - Last updated [API]: sept-29-2020<br>
         <nani>&nbsp; &nbsp; </nani>- Renamed: <nani>USE_VAD</nani> --> <nani>USE_VOICE_ACTIVATION</nani><br>
-        <nani>&nbsp; &nbsp; </nani>- Renamed: <nani>USE_EXTERNAL_EMOJIS</nani> --> <nani>EXTERNAL_EMOJIS</nani><br>
-        - Last updated [UTILITY]: nov-24-2020<br>
-        <nani>&nbsp; &nbsp; </nani>- Updated CSS<br>
-        <nani>&nbsp; &nbsp; </nani>- Updated inputs: Hovering over them now shows the DEC/HEX/BIN values<br><br>
+        <nani>&nbsp; &nbsp; </nani>- Renamed: <nani>USE_EXTERNAL_EMOJIS</nani> --> <nani>EXTERNAL_EMOJIS</nani><br><br>
+        - Last updated [UTILITY]: nov-25-2020<br>
+        <nani>&nbsp; &nbsp; </nani>- Now warns if number is invalid rather than working with it<br>
+        <nani>&nbsp; &nbsp; </nani>- Auto resize BIN value<br>
+        <nani>&nbsp; &nbsp; </nani>- Selected perms now are white, bold and italic<br>
+        <nani>&nbsp; &nbsp; </nani>- Disabled perms now are striked through<br>
+        <nani>&nbsp; &nbsp; </nani>- Larger perm font size<br><br>
         <a  href="./descriptions.html">Understand what each permission means</a><br>
         <a href="/prizm.dev/">Check out my other stuff!</a>
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
