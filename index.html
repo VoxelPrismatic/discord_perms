@@ -170,7 +170,7 @@
                 }
             }
             function parse_int(i) {
-                i = i + "";
+                i = (i + "").trim()
                 var int = Number.parseInt(i);
                 if(i.startsWith("0b"))
                     int = Number.parseInt(i.slice(2), 2);
@@ -180,6 +180,8 @@
             }
             function redo(evt) {
                 var val = document.getElementById("val").innerHTML;
+                if(val.trim().length == 2 && /^0[xb]$/i.test(val.trim()))
+                    return
                 int = parse_int(val);
                 if(evt.key == "ArrowUp")
                     int += 1;
