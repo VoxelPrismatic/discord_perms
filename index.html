@@ -170,7 +170,7 @@
                 }
             }
             function parse_int(i) {
-                i = (i + "").trim()
+                i = (i + "").trim().replace(/\n*\<\/?br>\n*/g, "");
                 if(i.length == 2 && /^0[xb]$/i.test(i))
                     throw Error("Invalid");
                 var int = Number(i);
@@ -205,7 +205,7 @@
             document.getElementById("val").onkeyup = (evt) => { 
                 window.clearTimeout(input_timeout);
                 if(!["ArrowUp", "ArrowDown"].includes(evt.key)) { 
-                    input_timeout = window.setTimeout(redo, 500, evt);
+                    input_timeout = window.setTimeout(redo, 100, evt);
                 } 
             };
             document.getElementById("val").onkeydown = (evt) => { 
