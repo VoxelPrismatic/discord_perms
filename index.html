@@ -98,6 +98,10 @@
                     }
                     document.getElementById("boxes").innerHTML += st;
                     perm = parse_int(document.URL.split("?perms=")[1]);
+                    globalint = perm || 0;
+                    window.setInterval(() => {
+                        window.history.replaceState("", null, "?perms=0x" + globalint.toString(16));
+                    }, 100)
                     if(!perm.isNaN) {
                         for(var key of Object.keys(perms))
                             document.getElementById(key).checked = (perm & perms[key]);
@@ -224,9 +228,6 @@
                 change_font_size('val-hex', 1);
                 change_font_size('val-bin', 1);
             }
-            window.setInterval(() => {
-                window.history.replaceState("", null, "?perms=0x" + globalint.toString(16));
-            }, 100)
         </script><br>
         <b>Notes:</b><br>
         - The green bit is the true value<br>
