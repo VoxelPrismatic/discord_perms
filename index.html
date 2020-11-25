@@ -60,10 +60,13 @@
                 #boxes { columns: 3; }
             } @media screen and (min-width: 1536px) {
                 #boxes { columns: 4; }
-            } input[type="checkbox"] {
+            } input[type="checkbox"], input[type="checkbox"] + label {
                 cursor: pointer;
-            } input[type="checkbox"]:disabled {
+            } input[type="checkbox"]:disabled, input[type="checkbox"]:disabled + label {
                 cursor: no-drop;
+                color: #888;
+            } input[type="checkbox"]:checked:not(:disabled) + label {
+                color: #fff;
             }
         </style>
     </head>
