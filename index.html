@@ -20,7 +20,7 @@
                 margin: auto;
                 background-color: #223333;
                 padding: 8px;
-                width: 100%;
+                width: 100% !important;
                 height: 55px;
                 max-height: 55px;
                 min-height: 55px;
@@ -36,7 +36,7 @@
                 border: 2px solid #00ff00;
                 background-color: #223322;
                 margin-left: 10px;
-                width: 210px;
+                width: 210px !important;
                 min-width: 210px;
             } #stdin {
                 width: 80%;
@@ -48,7 +48,7 @@
                 } #val2 {
                     margin-top: 8px;
                     margin-left: 0px;
-                    width: 100%;
+                    width: 100% !important;
                     min-width: 100%;
                     max-height: unset;
                     height: unset;
@@ -78,7 +78,7 @@
     <body>
         <h1>#] Discord permissions converter</h1>
         <div id="stdin">
-            <div id="val" title="Input value" contenteditable>0</div>
+            <textarea id="val" title="Input value" placeholder="0"></textarea>
             <div id="val2" title="True value">
                 <nani><b>DEC:</b> 0</nani><br>
                 <nani><b>HEX:</b> 0x0</nani><br>
@@ -152,7 +152,7 @@
                 change_font_size('val-dec');
                 change_font_size('val-hex');
                 change_font_size('val-bin');
-                var val = document.getElementById("val").innerHTML;
+                var val = document.getElementById("val").value.trim();
                 try {
                     window.history.replaceState("", null, "?perms=0x" + int.toString(16))
                 } catch(err) {
@@ -165,12 +165,19 @@
                 else if(val.startsWith("0o"))
                     int = "0o" + int.toString(8);
                 if(int + "" != val) {
+                    var e = document.getElementById("val")
+                    var sel = null;
+                    if(e.selectionStart == e.selectionEnd == e.value.length)
+                        sel = (int + "").length
                     document.getElementById("val").value = int + "";
-                    document.getElementById("val").innerHTML = int + "";
+                    if(sel) {
+                        e.selectionEnd = sel;
+                        e.selectionStart = sel;
+                    }
                 }
             }
             function parse_int(i) {
-                i = (i + "").trim().replace(/\n*\<\/?br>\n*/g, "");
+                i = (i + "").trim().replace(/\n*(\<\/?br\>)*\n*/g, "");
                 if(i.length == 2 && /^0[xb]$/i.test(i))
                     throw Error("Invalid");
                 var int = Number(i);
@@ -179,7 +186,7 @@
                 return int;
             }
             function redo(evt) {
-                var val = document.getElementById("val").innerHTML;
+                var val = document.getElementById("val").value;
                 var style = document.getElementById("val").style;
                 try {
                     int = parse_int(val);
