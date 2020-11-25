@@ -123,6 +123,7 @@
                     }
                 }
             }
+            var globalint = 0
             function recalc() {
                 var int = 0;
                 var trueint = 0
@@ -153,11 +154,7 @@
                 change_font_size('val-hex');
                 change_font_size('val-bin');
                 var val = document.getElementById("val").value.trim();
-                try {
-                    window.history.replaceState("", null, "?perms=0x" + int.toString(16))
-                } catch(err) {
-                    console.error(err);
-                }
+                globalint = int;
                 if(val.startsWith("0x"))
                     int = "0x" + int.toString(16);
                 else if(val.startsWith("0b"))
@@ -227,6 +224,9 @@
                 change_font_size('val-hex', 1);
                 change_font_size('val-bin', 1);
             }
+            window.setInterval(() => {
+                window.history.replaceState("", null, "?perms=0x" + globalint.toString(16));
+            }, 100)
         </script><br>
         <b>Notes:</b><br>
         - The green bit is the true value<br>
