@@ -203,12 +203,13 @@
             }
             var input_timeout = 0;
             document.getElementById("val").onkeyup = (evt) => { 
+                window.clearTimeout(input_timeout);
                 if(!["ArrowUp", "ArrowDown"].includes(evt.key)) { 
-                    globalThis.input_timeout = window.setTimeout(redo, 500, evt);
+                    input_timeout = window.setTimeout(redo, 500, evt);
                 } 
             };
             document.getElementById("val").onkeydown = (evt) => { 
-                window.clearTimeout(globalThis.input_timeout);
+                window.clearTimeout(input_timeout);
                 if(["ArrowUp", "ArrowDown"].includes(evt.key)) { 
                     redo(evt);
                 } 
