@@ -107,6 +107,20 @@
                     }
                 })
             });
+            function change_font_size(eID) {
+                var e = document.getElementById(eID);
+                var n = e.children[0].getBoundingClientRect().height;
+                e = e.children[1];
+                if(e.getBoundingClientRect().height > n) {
+                    e.style.fontSize = "small";
+                    if(e.getBoundingClientRect().height > n) {
+                        e.style.fontSize = "x-small";
+                        if(e.getBoundingClientRect().height > n) {
+                            e.style.fontSize = "xx-small";
+                        }
+                    }
+                }
+            }
             function recalc() {
                 var int = 0;
                 var trueint = 0
@@ -130,9 +144,12 @@
                     int = trueint;
                 }
                 document.getElementById("val2").innerHTML = `
-<nani><b>DEC:</b> ${trueint}</nani><br>
-<nani><b>HEX:</b> 0x${trueint.toString(16)}</nani><br>
-<nani><b>BIN:</b> <span style="font-size: x-small">0b${trueint.toString(2)}</span></nani>`;
+<nani id='val-dec'><b>DEC:</b> <span>${trueint}</span></nani><br>
+<nani id='val-hex'><b>HEX:</b> <span>0x${trueint.toString(16)}</span></nani><br>
+<nani id='val-bin'><b>BIN:</b> <span>0b${trueint.toString(2)}</span></nani>`;
+                change_font_size('val-dec');
+                change_font_size('val-hex');
+                change_font_size('val-bin');
                 var val = document.getElementById("val").innerHTML;
                 try {
                     window.history.replaceState("", null, "?perms=0x" + int.toString(16))
