@@ -203,7 +203,10 @@
                 else if(evt.key == "ArrowDown")
                     int -= 1;
                 mn = 0;
-                mx = Object.values(perms).reduce((a, b) => a + b);
+                mx = 0;
+                for(var p of Object.values(perms))
+                    mx += p; //Object.values(perms).reduce((a, b) => a + b);
+                console.log(mx, Object.values(perms).reduce((a, b) => a + b))
                 int = Math.min(Math.max(int, mn), mx);
                 for(var key of Object.keys(perms))
                     document.getElementById(key).checked = (int & perms[key]);
