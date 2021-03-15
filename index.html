@@ -127,12 +127,12 @@
                     }
                 }
             }
-            var globalint = 0
+            var globalint = BigInt(0)
             function recalc() {
-                var int = 0;
-                var trueint = 0
+                var int = 0n;
+                var trueint = 0n;
                 if(document.getElementById("ADMINISTRATOR").checked) {
-                    trueint = 8;
+                    trueint = 8n;
                     for(var key of Object.keys(perms)) {
                         elem = document.getElementById(key);
                         if(elem.checked)
@@ -165,12 +165,14 @@
                     int = "0b" + int.toString(2);
                 else if(val.startsWith("0o"))
                     int = "0o" + int.toString(8);
+                else
+                    int = int.toString()
                 if(int + "" != val) {
                     var e = document.getElementById("val")
                     var sel = null;
                     if(e.selectionStart == e.selectionEnd == e.value.length)
                         sel = (int + "").length
-                    document.getElementById("val").value = int + "";
+                    document.getElementById("val").value = int.toString();
                     if(sel) {
                         e.selectionEnd = sel;
                         e.selectionStart = sel;
@@ -178,13 +180,13 @@
                 }
             }
             function parse_int(i) {
-                i = (i + "").trim().replace(/\n*(\<\/?br\>)*\n*/g, "");
-                if(i.length == 2 && /^0[xb]$/i.test(i))
-                    throw Error("Invalid");
-                var int = Number(i);
-                if(isNaN(int))
-                    throw Error("Invalid");
-                return int;
+                return BigInt(i);
+                //i = (i + "").trim().replace(/\n*(\<\/?br\>)*\n*/g, "");
+                //if(i.length == 2 && /^0[xb]$/i.test(i))
+                //    throw Error("Invalid");
+                //if(isNaN(int))
+                //    throw Error("Invalid");
+                //return int;
             }
             function redo(evt) {
                 var val = document.getElementById("val").value;
@@ -199,15 +201,16 @@
                     return;
                 }
                 if(evt.key == "ArrowUp")
-                    int += 1;
+                    int += 1n;
                 else if(evt.key == "ArrowDown")
-                    int -= 1;
-                mn = 0;
-                mx = 0;
+                    int -= 1n;
+                mn = 0n;
+                mx = 0n;
                 for(var p of Object.values(perms))
                     mx += p; //Object.values(perms).reduce((a, b) => a + b);
                 console.log(mx, Object.values(perms).reduce((a, b) => a + b))
                 int = Math.min(Math.max(int, mn), mx);
+                console.log(int)
                 for(var key of Object.keys(perms))
                     document.getElementById(key).checked = (int & perms[key]);
                 recalc();
