@@ -228,6 +228,10 @@
                     redo(evt);
                 } 
             };
+            document.getElementById("val").onchange = (evt) => { 
+                window.clearTimeout(input_timeout);
+                redo(evt);
+            };
             var repeat_timeout = 0;
             window.onresize = () => {
                 change_font_size('val-dec', 1);
