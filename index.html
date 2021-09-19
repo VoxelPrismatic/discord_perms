@@ -100,6 +100,8 @@
                     perm = parse_int(document.URL.split("?perms=")[1]);
                     globalint = perm || 0;
                     window.setInterval(() => {
+                        if(location.split("?perms=0x")[1] == globalint.toString(16))
+                            return;
                         window.history.replaceState("", null, "?perms=0x" + globalint.toString(16));
                     }, 100)
                     if(!perm.isNaN) {
