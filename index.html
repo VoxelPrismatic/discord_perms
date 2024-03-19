@@ -108,7 +108,7 @@
                         perm = 0n
                     globalint = perm;
                     window.setInterval(() => {
-                        if(location.split("?perms=0x")[1] == globalint.toString(16))
+                        if(location.toString().split("?perms=0x")[1] == globalint.toString(16))
                             return;
                         window.history.replaceState("", null, "?perms=0x" + globalint.toString(16));
                     }, 100)
