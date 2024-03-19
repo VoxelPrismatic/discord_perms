@@ -89,6 +89,9 @@
         </div>
         <div id="boxes"></div>
         <script type="text/javascript">
+            function $(q, e = document) { return e.querySelector(q); }
+            function $$(q, e = document) { return e.querySelectorAll(q); }
+            
             fetch("perms.json").then((resp) => {
                 resp.text().then((text) => {
                     eval(text);
@@ -99,8 +102,11 @@
                               `<label for="${key}" ${title}> ${key}</label><br>`;
                     }
                     document.getElementById("boxes").innerHTML += st;
-                    perm = parse_int(document.URL.split("?perms=")[1]);
-                    globalint = perm || 0;
+                    if(document.URL.includes("?perms="))
+                        perm = parse_int(document.URL.split("?perms=")[1] || 0n);
+                    else
+                        perm = 0n
+                    globalint = perm;
                     window.setInterval(() => {
                         if(location.split("?perms=0x")[1] == globalint.toString(16))
                             return;
@@ -115,22 +121,28 @@
                     }
                 })
             });
+            
             function change_font_size(eID, reset = false) {
-                var e = document.getElementById(eID);
-                var n = e.children[0].getBoundingClientRect().height;
-                var ee = e.children[1];
-                if(reset)
-                    ee.style.fontSize = "";
-                if(e.getBoundingClientRect().height > n) {
-                    ee.style.fontSize = "small";
+                try {
+                    var e = document.getElementById(eID);
+                    var n = e.children[0].getBoundingClientRect().height;
+                    var ee = e.children[1];
+                    if(reset)
+                        ee.style.fontSize = "";
                     if(e.getBoundingClientRect().height > n) {
-                        ee.style.fontSize = "x-small";
+                        ee.style.fontSize = "small";
                         if(e.getBoundingClientRect().height > n) {
-                            ee.style.fontSize = "xx-small";
+                            ee.style.fontSize = "x-small";
+                            if(e.getBoundingClientRect().height > n) {
+                                ee.style.fontSize = "xx-small";
+                            }
                         }
                     }
+                } catch(err) {
+                    console.error(err);
                 }
             }
+            
             var globalint = BigInt(0)
             function recalc() {
                 var int = 0n;
@@ -213,7 +225,10 @@
                 for(var p of Object.values(perms))
                     mx += p; //Object.values(perms).reduce((a, b) => a + b);
                 console.log(mx, Object.values(perms).reduce((a, b) => a + b))
-                int = Math.min(Math.max(int, mn), mx);
+                if(int < mn)
+                    int = mn;
+                if(int > mx)
+                    int = mx;
                 console.log(int)
                 for(var key of Object.keys(perms))
                     document.getElementById(key).checked = (int & perms[key]);
@@ -226,13 +241,13 @@
                     input_timeout = window.setTimeout(redo, 100, evt);
                 } 
             };
-            document.getElementById("val").onkeydown = (evt) => { 
+            $("#val").onkeydown = (evt) => { 
                 window.clearTimeout(input_timeout);
                 if(["ArrowUp", "ArrowDown"].includes(evt.key)) { 
                     redo(evt);
                 } 
             };
-            document.getElementById("val").onchange = (evt) => { 
+            $("#val").onchange = (evt) => { 
                 window.clearTimeout(input_timeout);
                 redo(evt);
             };
