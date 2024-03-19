@@ -196,13 +196,11 @@
                 }
             }
             function parse_int(i) {
+                if(i.length == 0)
+                    throw Error("Blank");
+                if(i.endsWith("n"))
+                    i = i.slice(0, -1);
                 return BigInt(i);
-                //i = (i + "").trim().replace(/\n*(\<\/?br\>)*\n*/g, "");
-                //if(i.length == 2 && /^0[xb]$/i.test(i))
-                //    throw Error("Invalid");
-                //if(isNaN(int))
-                //    throw Error("Invalid");
-                //return int;
             }
             function redo(evt) {
                 var val = document.getElementById("val").value;
